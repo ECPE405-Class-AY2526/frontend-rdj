@@ -1,0 +1,66 @@
+.landing-container {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f9f9f9;
+  min-height: 100vh;
+  margin-top: 0; /* Add this line */
+  padding-top: 0; /* Add this line */
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #081083;
+  display: flex;
+  justify-content: flex-start; /* Align all items to the left */
+  align-items: center;
+  padding: 1rem 2rem;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  z-index: 1000;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-right: 3rem; /* Adds space between logo and links */
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.navbar-link:hover {
+  color: #c6f6d5;
+}
+
+.landing-content {
+  text-align: center;
+  margin-top: 6rem; /* Adjust based on navbar height */
+}
+
+.landing-content h1 {
+  font-size: 2rem;
+  color: #081083;
+  margin-bottom: 1rem;
+}
+
+.landing-content p {
+  font-size: 1.2rem;
+  color: #333;
+}
+.LandingPageImage img {
+  width: 800px;
+  max-width: 200%;
+  height: auto;
+}
