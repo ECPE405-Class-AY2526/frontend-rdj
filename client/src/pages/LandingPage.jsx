@@ -1,9 +1,12 @@
 import React from "react";
+import { useAuth } from "../context/AuthContext";
 import "./styles/LandingPageStyle.css";
 import landingImage from "./images/feature-pic-01-5.png";
 import BackgroundImage from "./images/background_img.png";
 
 function LandingPage() {
+  const { isAuthenticated, user, logout } = useAuth();
+
   return (
     <div
       className="landing-container"
@@ -17,15 +20,39 @@ function LandingPage() {
       <header className="navbar">
         <div className="navbar-logo">RDJ</div>
         <nav className="navbar-links">
-          <a href="/dashboard" className="navbar-link">
-            Dashboard
-          </a>
-          <a href="/" className="navbar-link">
-            About us
-          </a>
-          <a href="/login" className="navbar-link">
-            Login
-          </a>
+          {isAuthenticated ? (
+            <>
+              <a href="/dashboard" className="navbar-link">
+                Dashboard
+              </a>
+              <span className="navbar-user">Welcome, {user?.email}</span>
+              <button
+                onClick={logout}
+                className="navbar-link logout-btn"
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <a href="/" className="navbar-link">
+                About us
+              </a>
+              <a href="/login" className="navbar-link">
+                Login
+              </a>
+              <a href="/register" className="navbar-link">
+                Register
+              </a>
+            </>
+          )}
         </nav>
       </header>
 
