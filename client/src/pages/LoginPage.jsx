@@ -14,7 +14,7 @@ function LoginPage() {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    setError(""); // Clear error when user types
+    setError("");
   };
 
   const handleSubmit = async (e) => {
@@ -34,7 +34,6 @@ function LoginPage() {
       const data = await response.json();
 
       if (response.ok) {
-        // Login successful
         login(data.user);
         navigate("/dashboard");
       } else {

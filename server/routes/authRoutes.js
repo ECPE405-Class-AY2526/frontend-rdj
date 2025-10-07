@@ -3,21 +3,18 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
-// Register route
 router.post("/register", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // Create new user (no encryption)
     const newUser = new User({
       email,
-      password, // Store password as plain text
+      password,
     });
 
     await newUser.save();
@@ -32,7 +29,6 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Login route
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -43,7 +39,6 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    // Check password (plain text comparison)
     if (user.password !== password) {
       return res.status(400).json({ message: "Invalid email or password" });
     }
