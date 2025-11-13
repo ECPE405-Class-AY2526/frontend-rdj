@@ -113,7 +113,21 @@ html,
   transition: border-color 0.15s, box-shadow 0.15s, background 0.25s;
 }
 
-.form-group input:focus {
+.form-group select.role-select {
+  font: inherit;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  outline: none;
+  background: #f8faff;
+  color: #0f2340;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.25s;
+  font-weight: 600;
+}
+
+.form-group input:focus,
+.form-group select.role-select:focus {
   border-color: var(--blue-accent);
   box-shadow: 0 0 0 3px rgba(29, 59, 255, 0.25);
   background: #ffffff;

@@ -5,7 +5,7 @@ import landingImage from "./images/Figure.png";
 import BackgroundImage from "./images/background_img.png";
 
 function Dashboard() {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, user, logout, isAdmin } = useAuth();
 
   return (
     <div
@@ -22,6 +22,17 @@ function Dashboard() {
         <nav className="navbar-links">
           {isAuthenticated ? (
             <>
+              <a href="/dashboard" className="navbar-link">
+                Dashboard
+              </a>
+              {isAdmin && (
+                <a href="/user-management" className="navbar-link">
+                  User Management
+                </a>
+              )}
+              <span className="navbar-user">
+                {isAdmin ? "Admin" : "User"}: {user?.email}
+              </span>
               <button
                 onClick={logout}
                 className="navbar-link logout-btn"

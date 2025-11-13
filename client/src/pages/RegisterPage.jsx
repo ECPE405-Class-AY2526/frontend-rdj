@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import { API_BASE_URL } from "../config.js";
 import "./styles/RegisterPage.css";
 import BackgroundImage from "./images/background_img.png";
 
@@ -30,7 +31,7 @@ function RegisterPage() {
     }
 
     try {
-      const response = await fetch("http://localhost:5001/api/auth/register", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -7,11 +7,13 @@ import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
+import UserManagement from "./pages/UserManagement";
 
 const App = () => {
   return (
     <AuthProvider>
       <div>
+        {/* pwd ka d ka manipulate e.g. if ang nag login is admin [local_user_role==admin] then pd mo e pakita ang route nga e.g. UserManagementTab  */}
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route
@@ -35,6 +37,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/user-management"
+            element={
+              <ProtectedRoute>
+                <UserManagement />
               </ProtectedRoute>
             }
           />

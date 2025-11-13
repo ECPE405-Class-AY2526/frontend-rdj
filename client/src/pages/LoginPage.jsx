@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
+import { API_BASE_URL } from "../config.js";
 import "./styles/LoginPage.css";
 import BackgroundImage from "./images/background_img.png";
 
 function LoginPage() {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    loginAsRole: "user",
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,7 +28,7 @@ function LoginPage() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5001/api/auth/login", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,6 +67,20 @@ function LoginPage() {
         {error && <div className="error-message">{error}</div>}
 
         <form onSubmit={handleSubmit} className="login-form">
+          <div className="form-group">
+            <label htmlFor="loginAsRole">Login As</label>
+            <select
+              id="loginAsRole"
+              name="loginAsRole"
+              value={form.loginAsRole}
+              onChange={handleChange}
+              className="role-select"
+              required
+            >
+              <option value="user"> Client</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input

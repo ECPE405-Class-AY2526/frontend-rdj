@@ -38,6 +38,9 @@ export const AuthProvider = ({ children }) => {
     login,
     logout,
     isAuthenticated: !!user,
+    userRole: user?.role || null,
+    isAdmin: user?.role === "admin",
+    isUser: user?.role === "user",
   };
 
   if (loading) {
