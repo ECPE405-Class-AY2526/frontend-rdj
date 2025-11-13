@@ -5,6 +5,7 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import path from "path";
 import { fileURLToPath } from "url";
+import mongoose from "mongoose";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 
@@ -33,6 +34,21 @@ app.use(limiter);
 
 app.get("/", (req, res) => {
   res.json({ message: "I hear you!" });
+});
+
+// Health check: reports server up, mongoose readyState, and optional ping
+app.get("/health", async (req, res) => {
+  const state = mongoose.connection?.readyState;
+  let ping = "skipped";
+  try {
+    if (state === 1 && mongoose.connection?.db) {
+      await mongoose.connection.db.admin().command({ ping: 1 });
+      ping = "ok";
+    }
+  } catch (e) {
+    ping = "fail";
+  }
+  res.json({ status: "ok", dbState: state, ping });
 });
 
 app.use("/api/auth", authRoutes);
