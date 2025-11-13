@@ -7,10 +7,10 @@
     "server"
   ],
   "scripts": {
-    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
-    "build": "npm run install:all && cd client && npm run build",
-    "build:client": "cd client && npm install && npm run build",
-    "postinstall": "cd server && npm install || true",
+    "build": "cd client && npm ci && npm run build && cd ../server && npm ci",
+    "build:client": "cd client && npm ci && npm run build",
+    "install:server": "cd server && npm ci",
+    "install:client": "cd client && npm ci",
     "start": "node server/server.js",
     "dev:api": "npm run dev -w server",
     "dev:client": "npm run dev -w client",
