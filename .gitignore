@@ -1,0 +1,33 @@
+node_modules/
+client/node_modules/
+server/node_modules/
+mobile/RDJMobile/node_modules/
+
+dist/
+client/dist/
+
+# Env files (do not commit secrets)
+server/.env
+client/.env
+mobile/RDJMobile/.env
+
+# Logs
+*.log
+logs/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+
+# Build artifacts
+*.zip
+*.tgz
+
+# React Native specific caches
+mobile/RDJMobile/android/
+mobile/RDJMobile/ios/
+mobile/RDJMobile/.gradle/
+mobile/RDJMobile/.expo/
+mobile/RDJMobile/coverage/
