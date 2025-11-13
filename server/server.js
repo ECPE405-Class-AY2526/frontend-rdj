@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 import path from "path";
 import { fileURLToPath } from "url";
 import { connectDB } from "./config/db.js";
@@ -10,9 +12,19 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
+// Security & core middleware
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
+
+// Rate limiting (basic global limiter)
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 100,
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+});
+app.use(limiter);
 
 app.get("/", (req, res) => {
   res.json({ message: "I hear you!" });

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
-import { API_BASE_URL } from "../config.js";
 import "./styles/LoginPage.css";
 import BackgroundImage from "./images/background_img.png";
 
@@ -28,7 +27,7 @@ function LoginPage() {
     setError("");
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+      const response = await fetch(`/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
