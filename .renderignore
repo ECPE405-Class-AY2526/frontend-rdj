@@ -1,0 +1,6 @@
+mobile/
+node_modules/
+*.log
+*.md
+.github/
+README.md
