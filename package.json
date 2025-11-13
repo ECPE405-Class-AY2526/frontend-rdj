@@ -7,10 +7,10 @@
     "server"
   ],
   "scripts": {
-    "build": "cd client && npm install --no-audit --no-fund && npm run build && cd ../server && npm install --no-audit --no-fund",
-    "build:client": "cd client && npm install --no-audit --no-fund && npm run build",
-    "install:server": "cd server && npm install --no-audit --no-fund",
-    "install:client": "cd client && npm install --no-audit --no-fund",
+    "build": "cd client && npm install --no-audit --no-fund --include=optional && npm run build && cd ../server && npm install --no-audit --no-fund --include=optional",
+    "build:client": "cd client && npm install --no-audit --no-fund --include=optional && npm run build",
+    "install:server": "cd server && npm install --no-audit --no-fund --include=optional",
+    "install:client": "cd client && npm install --no-audit --no-fund --include=optional",
     "start": "node server/server.js",
     "dev:api": "npm run dev -w server",
     "dev:client": "npm run dev -w client",
