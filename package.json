@@ -17,6 +17,6 @@
     "dev": "npm run dev:api & npm run dev:client"
   },
   "engines": {
-    "node": ">=18"
+    "node": "20.x"
   }
 }
