@@ -61,8 +61,8 @@ connectDB()
     if (process.env.NODE_ENV === "production") {
       const clientDist = path.join(__dirname, "..", "client", "dist");
       app.use(express.static(clientDist));
-      // Express v5 + path-to-regexp v6: use a compatible catch-all
-      app.get("(.*)", (req, res) => {
+      // Express v5 + path-to-regexp v6: use a RegExp catch-all
+      app.get(/.*/, (req, res) => {
         res.sendFile(path.join(clientDist, "index.html"));
       });
     }
