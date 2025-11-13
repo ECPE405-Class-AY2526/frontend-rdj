@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
 import UserManagement from "./pages/UserManagement";
+import HealthPage from "./pages/HealthPage";
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route path="/health" element={<HealthPage />} />
         </Routes>
       </div>
     </AuthProvider>

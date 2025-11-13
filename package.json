@@ -14,7 +14,9 @@
     "start": "node server/server.js",
     "dev:api": "npm run dev -w server",
     "dev:client": "npm run dev -w client",
-    "dev": "npm run dev:api & npm run dev:client"
+    "dev": "npm run dev:api & npm run dev:client",
+    "health": "node ./scripts/health-check.mjs",
+    "health:url": "node ./scripts/health-check.mjs %HEALTH_URL%"
   },
   "engines": {
     "node": "20.x"
