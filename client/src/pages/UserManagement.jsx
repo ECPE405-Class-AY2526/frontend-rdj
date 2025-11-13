@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 import "./styles/UserManagement.css";
+import { API_BASE_URL } from "../config.js";
 import BackgroundImage from "./images/background_img.png";
 
 function UserManagement() {
@@ -24,7 +25,7 @@ function UserManagement() {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/auth/users`);
+        const response = await fetch(`${API_BASE_URL}/api/auth/users`);
       const data = await response.json();
 
       if (response.ok) {
@@ -41,7 +42,7 @@ function UserManagement() {
 
   const handleRoleChange = async (userId, newRole) => {
     try {
-      const response = await fetch(`/api/auth/users/${userId}/role`, {
+          const response = await fetch(`${API_BASE_URL}/api/auth/users/${userId}/role`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +71,7 @@ function UserManagement() {
     }
 
     try {
-      const response = await fetch(`/api/auth/users/${userId}`, {
+          const response = await fetch(`${API_BASE_URL}/api/auth/users/${userId}`, {
         method: "DELETE",
       });
 

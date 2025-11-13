@@ -7,6 +7,9 @@ dist/
 client/dist/
 
 # Env files (do not commit secrets)
+.env
+.env.*
+*/.env
 server/.env
 client/.env
 mobile/RDJMobile/.env

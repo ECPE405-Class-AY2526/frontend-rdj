@@ -8,7 +8,12 @@ import { fileURLToPath } from "url";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 
-dotenv.config();
+// Resolve __dirname for ESM and load env for local dev (Render uses dashboard env)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load server/.env when running locally; Render provides env vars at runtime
+dotenv.config({ path: path.join(__dirname, ".env") });
 
 const app = express();
 
@@ -32,21 +37,28 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 
-connectDB().then(() => {
-  const PORT = process.env.PORT || 5001;
+connectDB()
+  .then(() => {
+    const PORT = process.env.PORT || 5001;
 
-  // Serve built client in production (single Render service option)
-  if (process.env.NODE_ENV === "production") {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    const clientDist = path.join(__dirname, "..", "client", "dist");
-    app.use(express.static(clientDist));
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(clientDist, "index.html"));
+    // Serve built client in production (single Render service option)
+    if (process.env.NODE_ENV === "production") {
+      const clientDist = path.join(__dirname, "..", "client", "dist");
+      app.use(express.static(clientDist));
+      // Express v5 + path-to-regexp v6: use a compatible catch-all
+      app.get("(.*)", (req, res) => {
+        res.sendFile(path.join(clientDist, "index.html"));
+      });
+    }
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
     });
-  }
-
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  })
+  .catch((err) => {
+    console.error(
+      "Failed to start server due to DB connection error:",
+      err?.message || err
+    );
+    process.exit(1);
   });
-});
