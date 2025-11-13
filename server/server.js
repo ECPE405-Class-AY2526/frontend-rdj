@@ -32,9 +32,12 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-app.get("/", (req, res) => {
-  res.json({ message: "I hear you!" });
-});
+// Simple root response in development only; in production we serve the SPA
+if (process.env.NODE_ENV !== "production") {
+  app.get("/", (req, res) => {
+    res.json({ message: "I hear you!" });
+  });
+}
 
 // Health check: reports server up, mongoose readyState, and optional ping
 app.get("/health", async (req, res) => {
